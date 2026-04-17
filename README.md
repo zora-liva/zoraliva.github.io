@@ -4,11 +4,8 @@ title: Home
 ---
 
 <div class="hero">
-  <h1>Curated lists, tools, and digital finds</h1>
+  <h1>Paid Links</h1>
   <p>
-    I collect useful resources, creative tools, and standout finds across AI, design, and online business.
-  </p>
-</div>
 
 <h2>Featured Lists</h2>
 
