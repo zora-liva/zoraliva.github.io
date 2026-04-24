@@ -1,109 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Best Amazon Finds Under $50 | Kaia Layn</title>
-  <style>
-    :root {
-      --bg: #fffaf8;
-      --card: #ffffff;
-      --text: #2f2623;
-      --muted: #8d7b74;
-      --accent: #6a3d2e;
-      --border: #f0e4de;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    * {
-      box-sizing: border-box;
-    }
+<title>Best Amazon Finds Under $50 | Kaia Layn</title>
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
+<style>
+:root {
+  --bg: #fffaf8;
+  --card: #ffffff;
+  --text: #2f2623;
+  --muted: #8d7b74;
+  --accent: #6a3d2e;
+  --border: #f0e4de;
+  --soft-card: #f2e5e8;
+}
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 48px 20px;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    .back-link {
-      display: inline-block;
-      margin-bottom: 24px;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 700;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
 
-    .page-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-    }
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 48px 20px;
+}
 
-    h1 {
-      margin-top: 0;
-      color: var(--accent);
-    }
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
 
-    .subtitle {
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
+.page-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+}
 
-    .product-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+h1 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
 
-    .product-list li {
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-    }
+.subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
 
-    .product-list li:last-child {
-      border-bottom: none;
-    }
+.note {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 28px;
+}
 
-    .product-list a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 700;
-    }
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
 
-    .note {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-top: 24px;
-    }
-  </style>
+.product-card {
+  background: var(--soft-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.product-card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
+
+.product-info {
+  padding: 18px;
+}
+
+.product-info h2 {
+  font-size: 1rem;
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+
+.product-info p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.product-info a {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.product-info a:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 640px) {
+  .page-card {
+    padding: 22px;
+  }
+
+  .product-card img {
+    height: 170px;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <a class="back-link" href="index.html">← Back to home</a>
 
-    <div class="page-card">
-      <h1>Best Amazon Finds Under $50</h1>
-      <p class="subtitle">Budget-friendly finds that feel surprisingly premium.</p>
-      <p class="note">Affiliate links may earn me a commission at no extra cost to you.</p>
-      
+<div class="container">
 
-      <ul class="product-list">
-        <li><a href="#">Product 1 name</a></li>
-        <li><a href="#">Product 2 name</a></li>
-        <li><a href="#">Product 3 name</a></li>
-        <li><a href="#">Product 4 name</a></li>
-      </ul>
+  <a class="back-link" href="index.html">← Back to home</a>
+
+  <div class="page-card">
+
+    <h1>Best Amazon Finds Under $50</h1>
+
+    <p class="subtitle">
+      Budget-friendly gems that feel surprisingly premium.
+    </p>
+
+    <p class="note">
+      As an Amazon Associate, I earn from qualifying purchases.
+    </p>
+
+    <div class="product-grid">
+
+      <div class="product-card">
+        <img src="images/product1.jpg" alt="Product 1">
+        <div class="product-info">
+          <h2>Flameless Candles Set of 2</h2>
+          <a href="https://amzn.to/4tzd9BP" target="_blank" rel="nofollow sponsored">
+            Shop on Amazon
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="images/product2.jpg" alt="Product 2">
+        <div class="product-info">
+          <h2>Glass Coffee Mug Set</h2>
+          <p>Elegant everyday mugs that look far more expensive.</p>
+          <a href="YOUR_AFFILIATE_LINK_HERE" target="_blank" rel="nofollow sponsored">
+            Shop on Amazon
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="images/product3.jpg" alt="Product 3">
+        <div class="product-info">
+          <h2>Luxury Throw Blanket</h2>
+          <p>Cozy texture and premium feel for under budget.</p>
+          <a href="YOUR_AFFILIATE_LINK_HERE" target="_blank" rel="nofollow sponsored">
+            Shop on Amazon
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="images/product4.jpg" alt="Product 4">
+        <div class="product-info">
+          <h2>Marble Vanity Tray</h2>
+          <p>Perfect for perfumes, candles, jewelry, or decor styling.</p>
+          <a href="YOUR_AFFILIATE_LINK_HERE" target="_blank" rel="nofollow sponsored">
+            Shop on Amazon
+          </a>
+        </div>
+      </div>
 
     </div>
+
   </div>
+
+</div>
+
 </body>
 </html>
