@@ -124,8 +124,15 @@ h1 {
   font-weight: 700;
 }
 
+.product-info a {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+}
+
 .product-info a:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  background: #5a3326; /* slightly darker than your accent */
 }
 
 @media (max-width: 640px) {
