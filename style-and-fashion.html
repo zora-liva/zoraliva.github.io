@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Style & Fashion | Kaia Layn</title>
+
+<style>
+:root {
+  --bg: #fffaf8;
+  --card: #ffffff;
+  --text: #2f2623;
+  --muted: #8d7b74;
+  --accent: #6a3d2e;
+  --border: #f0e4de;
+  --soft-card: #f2e5e8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 20px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.page-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+}
+
+h1 {
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 250, 248, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 26px;
+}
+
+.search-box {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+.filter-section {
+  margin-top: 12px;
+}
+
+.filter-label {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-btn {
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--accent);
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+  background: var(--soft-card);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.result-count {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.product-card {
+  background: var(--soft-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.product-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5; /* ✅ UPDATED HERE */
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+.product-info {
+  padding: 18px;
+}
+
+.product-info h2 {
+  font-size: 1rem;
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+
+.product-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.product-info a {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.product-info a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  background: #5a3326;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<a class="back-link" href="index.html">← Back to home</a>
+
+<div class="page-card">
+
+<h1>Style & Fashion</h1>
+<p class="subtitle">Shop by piece and color.</p>
+
+<div class="filter-bar">
+
+<input id="searchInput" class="search-box" placeholder="Search fashion finds...">
+
+<div class="filter-section">
+<p class="filter-label">Shop by piece</p>
+<div class="filter-group" id="pieceFilters">
+<button class="filter-btn active" data-piece="all">All</button>
+<button class="filter-btn" data-piece="tops">Tops</button>
+<button class="filter-btn" data-piece="dresses">Dresses</button>
+<button class="filter-btn" data-piece="bottoms">Bottoms</button>
+<button class="filter-btn" data-piece="sets">Sets</button>
+<button class="filter-btn" data-piece="lounge">Lounge</button>
+<button class="filter-btn" data-piece="swim">Swim</button>
+<button class="filter-btn" data-piece="accessories">Accessories</button>
+</div>
+</div>
+
+<div class="filter-section">
+<p class="filter-label">Shop by color</p>
+<div class="filter-group" id="colorFilters">
+<button class="filter-btn active" data-color="all">All</button>
+<button class="filter-btn" data-color="black">Black</button>
+<button class="filter-btn" data-color="white">White</button>
+<button class="filter-btn" data-color="neutral">Neutral</button>
+<button class="filter-btn" data-color="green">Green</button>
+<button class="filter-btn" data-color="gold">Gold</button>
+</div>
+</div>
+
+<p id="resultCount" class="result-count"></p>
+
+</div>
+
+<div class="product-grid">
+
+<!-- Example product -->
+<div class="product-card" data-piece="sets lounge" data-color="black" data-search="lounge set black">
+<img src="images/2pcloungeblack.png">
+<div class="product-info">
+<h2>Two Piece Lounge Set</h2>
+<div class="product-meta">Sets · Black</div>
+<a href="#">Shop on Amazon</a>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script>
+const cards = document.querySelectorAll(".product-card");
+const searchInput = document.getElementById("searchInput");
+const resultCount = document.getElementById("resultCount");
+
+let activePiece = "all";
+let activeColor = "all";
+
+function filterProducts() {
+  let visible = 0;
+  const search = searchInput.value.toLowerCase();
+
+  cards.forEach(card => {
+    const piece = card.dataset.piece;
+    const color = card.dataset.color;
+    const text = card.dataset.search;
+
+    const match =
+      (activePiece === "all" || piece.includes(activePiece)) &&
+      (activeColor === "all" || color.includes(activeColor)) &&
+      text.includes(search);
+
+    card.classList.toggle("hidden", !match);
+    if (match) visible++;
+  });
+
+  resultCount.textContent = `Showing ${visible} picks`;
+}
+
+document.querySelectorAll("#pieceFilters button").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll("#pieceFilters button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activePiece = btn.dataset.piece;
+    filterProducts();
+  };
+});
+
+document.querySelectorAll("#colorFilters button").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll("#colorFilters button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeColor = btn.dataset.color;
+    filterProducts();
+  };
+});
+
+searchInput.oninput = filterProducts;
+
+filterProducts();
+</script>
+
+</body>
+</html>
