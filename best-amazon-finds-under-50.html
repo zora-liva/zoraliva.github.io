@@ -96,6 +96,14 @@ h1 {
   transform: scale(1.05);     /* subtle zoom */
 }
 
+.product-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  
 .product-info {
   padding: 18px;
 }
@@ -124,8 +132,13 @@ h1 {
   font-weight: 700;
 }
 
+.product-info a {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
 .product-info a:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
 
 @media (max-width: 640px) {
