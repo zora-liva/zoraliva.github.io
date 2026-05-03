@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Beauty, Body & Mind | Kaia Layn</title>
+
+<style>
+:root {
+  --bg: #fffaf8;
+  --card: #ffffff;
+  --text: #2f2623;
+  --muted: #8d7b74;
+  --accent: #6a3d2e;
+  --border: #f0e4de;
+  --soft-card: #f2e5e8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 20px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.page-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+}
+
+h1 {
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 24px;
+}
+
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 250, 248, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 26px;
+}
+
+.search-box {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+.filter-section {
+  margin-top: 12px;
+}
+
+.filter-label {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-btn {
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--accent);
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+  background: var(--soft-card);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.result-count {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.product-card {
+  background: var(--soft-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.product-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+.product-info {
+  padding: 18px;
+}
+
+.product-info h2 {
+  font-size: 1rem;
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+
+.product-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.product-info a {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.product-info a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  background: #5a3326;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<a class="back-link" href="index.html">← Back to home</a>
+
+<div class="page-card">
+
+<h1>Beauty, Body & Mind</h1>
+<p class="subtitle">Skincare, haircare, body care, wellness, and glow-up essentials.</p>
+<p class="note">As an Amazon Associate, I earn from qualifying purchases.</p>
+
+<div class="filter-bar">
+
+<input id="searchInput" class="search-box" placeholder="Search beauty, skincare, haircare, wellness...">
+
+<div class="filter-section">
+<p class="filter-label">Shop by category</p>
+<div class="filter-group" id="categoryFilters">
+<button class="filter-btn active" data-category="all">All</button>
+<button class="filter-btn" data-category="skincare">Skincare</button>
+<button class="filter-btn" data-category="makeup">Makeup</button>
+<button class="filter-btn" data-category="haircare">Haircare</button>
+<button class="filter-btn" data-category="body">Body</button>
+<button class="filter-btn" data-category="tools">Tools</button>
+<button class="filter-btn" data-category="wellness">Wellness</button>
+<button class="filter-btn" data-category="teeth">Teeth & Smile</button>
+<button class="filter-btn" data-category="lashes">Lashes & Brows</button>
+</div>
+</div>
+
+<p id="resultCount" class="result-count"></p>
+
+</div>
+
+<div class="product-grid">
+
+<div class="product-card" data-category="skincare" data-search="biodance collagen overnight face mask skincare hydration glow">
+<img src="images/glowup/biodancemask.png">
+<div class="product-info">
+<h2>BIODANCE Bio-Collagen Overnight Face Mask</h2>
+<div class="product-meta">Skincare · Hydration · Glow</div>
+<a href="https://amzn.to/4ehSPA5" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="haircare" data-search="k18 leave in molecular repair hair mask damage repair haircare">
+<img src="images/glowup/k18.png">
+<div class="product-info">
+<h2>K18 Leave-In Molecular Repair Hair Mask</h2>
+<div class="product-meta">Haircare · Repair</div>
+<a href="https://amzn.to/4djN8k5" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="makeup" data-search="estee lauder double wear concealer makeup complexion everyday">
+<img src="images/glowup/elconcealer.png">
+<div class="product-info">
+<h2>Estée Lauder Double Wear Stay-in-Place Flawless Concealer</h2>
+<div class="product-meta">Makeup · Complexion</div>
+<a href="https://amzn.to/3QNUt2H" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="wellness" data-search="nutrafol women hair growth supplements wellness beauty hair growth">
+<img src="images/glowup/nutrafol.png">
+<div class="product-info">
+<h2>Nutrafol Women Hair Growth Supplements</h2>
+<div class="product-meta">Wellness · Hair Growth</div>
+<a href="https://amzn.to/427NBQa" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="skincare" data-search="lumify eye drops brighter eyes beauty everyday essential">
+<img src="images/glowup/luminadrops.png">
+<div class="product-info">
+<h2>LUMIFY Eye Drops for Brighter Eyes</h2>
+<div class="product-meta">Skincare · Everyday Essential</div>
+<a href="https://amzn.to/4ehy07U" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="skincare" data-search="anua niacinamide txa serum skincare brightening dark spots glow">
+<img src="images/glowup/anua1o.png">
+<div class="product-info">
+<h2>Anua Niacinamide 10 + TXA 4 Serum</h2>
+<div class="product-meta">Skincare · Brightening</div>
+<a href="https://amzn.to/4ug2pIu" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="makeup" data-search="iconic london illuminator makeup highlighter glow">
+<img src="images/glowup/iconic.png">
+<div class="product-info">
+<h2>ICONIC LONDON Illuminator</h2>
+<div class="product-meta">Makeup · Glow</div>
+<a href="https://amzn.to/4cUw3gJ" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="tools" data-search="shark cryoglow led anti aging infrared light therapy tool skincare device">
+<img src="images/glowup/sharkfacelight.png">
+<div class="product-info">
+<h2>Shark CryoGlow LED Anti-Aging & Repair Infrared Light Therapy</h2>
+<div class="product-meta">Tools · At-Home Treatment</div>
+<a href="https://amzn.to/4uoiRq7" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="haircare" data-search="kerastase elixir ultime hair oil shine smooth haircare">
+<img src="images/glowup/keraoil.png">
+<div class="product-info">
+<h2>Kerastase Elixir Ultime Hair Oil</h2>
+<div class="product-meta">Haircare · Shine</div>
+<a href="https://amzn.to/3P1SjvQ" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="wellness" data-search="codeage collagen peptides protein powder wellness beauty from within">
+<img src="images/glowup/collpep.png">
+<div class="product-info">
+<h2>Codeage Multi Collagen Protein Powder Peptides</h2>
+<div class="product-meta">Wellness · Collagen</div>
+<a href="https://amzn.to/3QLi97R" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="wellness haircare skincare" data-search="mulberry silk pillowcase hair skin wellness sleep beauty">
+<img src="images/glowup/silkpillow.png">
+<div class="product-info">
+<h2>Mulberry Silk Pillowcase for Hair and Skin</h2>
+<div class="product-meta">Wellness · Hair & Skin</div>
+<a href="https://amzn.to/4tWAtcP" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="makeup" data-search="wonderskin wonder blading lip stain masque makeup lip color">
+<img src="images/glowup/wonderlip.png">
+<div class="product-info">
+<h2>Wonderskin Wonder Blading All Day Lip Stain Masque</h2>
+<div class="product-meta">Makeup · Lips</div>
+<a href="https://amzn.to/4unKXBF" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="haircare" data-search="it's a 10 miracle leave in conditioner haircare repair detangle">
+<img src="images/glowup/itsa10.png">
+<div class="product-info">
+<h2>It's a 10 Haircare Miracle Leave-In</h2>
+<div class="product-meta">Haircare · Leave-In</div>
+<a href="https://amzn.to/4utj8rX" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="skincare" data-search="tosowoong arbutin tranexamic acid cream skincare brightening dark spots">
+<img src="images/glowup/cream1.png">
+<div class="product-info">
+<h2>TOSOWOONG Arbutin 7% + Tranexamic Acid 4% Cream</h2>
+<div class="product-meta">Skincare · Brightening</div>
+<a href="https://amzn.to/4w44fOl" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="makeup" data-search="wonderskin cream blush stick ph activated makeup glow blush">
+<img src="images/glowup/wonderblush.png">
+<div class="product-info">
+<h2>Wonderskin Cream Blush Stick pH-Activated</h2>
+<div class="product-meta">Makeup · Blush</div>
+<a href="https://amzn.to/4d0SFL0" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="skincare" data-search="retinol gel vitamin a skincare anti aging fine lines wrinkles">
+<img src="images/glowup/retinol.png">
+<div class="product-info">
+<h2>Retinol Gel 0.05 Vitamin A Repairs Fine Lines & Wrinkles</h2>
+<div class="product-meta">Skincare · Anti-Aging</div>
+<a href="https://amzn.to/4da92VY" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="tools" data-search="nuderma clinical portable skin therapy wand high frequency skincare tool">
+<img src="images/glowup/highfreq.png">
+<div class="product-info">
+<h2>NuDerma Clinical Portable Skin Therapy Wand</h2>
+<div class="product-meta">Tools · Skincare Device</div>
+<a href="https://amzn.to/4w1qMLz" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="tools haircare" data-search="shark flexstyle air styling drying system hair tool blow dryer">
+<img src="images/glowup/sharkset.png">
+<div class="product-info">
+<h2>Shark FlexStyle Air Styling & Drying System</h2>
+<div class="product-meta">Tools · Hair Styling</div>
+<a href="https://amzn.to/4epjuv0" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="haircare" data-search="kerastase gloss absolu high shine moisture conditioner haircare">
+<img src="images/glowup/kerashampoo.JPG">
+<div class="product-info">
+<h2>Kerastase Gloss Absolu High-Shine Moisture Conditioner</h2>
+<div class="product-meta">Haircare · Conditioner</div>
+<a href="https://amzn.to/4tadyJG" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="body" data-search="loving tan express self tanning mousse body glow tan">
+<img src="images/glowup/lovingtan.png">
+<div class="product-info">
+<h2>Loving Tan 2 HR Express Self Tanning Mousse</h2>
+<div class="product-meta">Body · Self Tan</div>
+<a href="https://amzn.to/4wpEdW7" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="body makeup" data-search="westmore beauty body coverage perfector body makeup coverage">
+<img src="images/glowup/westmore.png">
+<div class="product-info">
+<h2>Westmore Beauty Body Coverage Perfector</h2>
+<div class="product-meta">Body · Coverage</div>
+<a href="https://amzn.to/4eIL7PR" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="haircare" data-search="kerastase densifique densite shampoo haircare volume density">
+<img src="images/glowup/keracond.png">
+<div class="product-info">
+<h2>Kerastase Densifique Densité Shampoo</h2>
+<div class="product-meta">Haircare · Shampoo</div>
+<a href="https://amzn.to/3QJt3Ln" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="skincare" data-search="grace and stella retinol under eye patches skincare anti aging hydration">
+<img src="images/glowup/eyemasks.png">
+<div class="product-info">
+<h2>grace & stella Retinol Under Eye Patches</h2>
+<div class="product-meta">Skincare · Eye Care</div>
+<a href="https://amzn.to/4dm5z7J" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="body" data-search="osea undaria algae body oil hydration body glow body care">
+<img src="images/glowup/oseaoil.png">
+<div class="product-info">
+<h2>OSEA Undaria Algae Body Oil</h2>
+<div class="product-meta">Body · Body Oil</div>
+<a href="https://amzn.to/4n2pwni" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="skincare" data-search="frownies wrinkle patches skincare anti aging forehead lines">
+<img src="images/glowup/frownies.png">
+<div class="product-info">
+<h2>Frownies Wrinkle Patches</h2>
+<div class="product-meta">Skincare · Anti-Aging</div>
+<a href="https://amzn.to/4t9WuUg" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="skincare" data-search="eltamd uv daily tinted spf 40 sunscreen skincare sun protection">
+<img src="images/glowup/eltaspf.png">
+<div class="product-info">
+<h2>EltaMD UV Daily Tinted SPF 40 Face Sunscreen</h2>
+<div class="product-meta">Skincare · SPF</div>
+<a href="https://amzn.to/4uq2ZU2" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="skincare" data-search="clean skin club clean towels skincare clean routine disposable face towels">
+<img src="images/glowup/cleantowels.png">
+<div class="product-info">
+<h2>CLEAN SKIN CLUB Healthy Anti-Aging Clean Towels</h2>
+<div class="product-meta">Skincare · Clean Routine</div>
+<a href="https://amzn.to/4n8PqG8" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="skincare" data-search="medicube triple collagen cream hydrating firming moisturizer skincare">
+<img src="images/glowup/medicoll.png">
+<div class="product-info">
+<h2>Medicube Triple Collagen Cream</h2>
+<div class="product-meta">Skincare · Moisturizer</div>
+<a href="https://amzn.to/4taWwLy" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="skincare" data-search="anua heartleaf quercetinol pore deep cleansing foam cleanser skincare">
+<img src="images/glowup/anualeaf.png">
+<div class="product-info">
+<h2>Anua Heartleaf Quercetinol Pore Deep Cleansing Foam</h2>
+<div class="product-meta">Skincare · Cleanser</div>
+<a href="https://amzn.to/4w6eeCP" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="teeth" data-search="crest 3d whitestrips professional effects teeth whitening kit smile">
+<img src="images/glowup/crestwhite.png">
+<div class="product-info">
+<h2>Crest 3D Whitestrips Professional Effects</h2>
+<div class="product-meta">Teeth & Smile · Whitening</div>
+<a href="https://amzn.to/4tMubfD" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="lashes" data-search="eyelash brow tint kit lashes brows beauty tint">
+<img src="images/glowup/tintkit.png">
+<div class="product-info">
+<h2>Eyelash & Brow Tint Kit</h2>
+<div class="product-meta">Lashes & Brows · Tint</div>
+<a href="https://amzn.to/49nF9jy" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="lashes" data-search="diy lash extension kit natural wispy lashes beauty">
+<img src="images/glowup/lashexts.png">
+<div class="product-info">
+<h2>DIY Lash Extension Kit Natural Look Wispy</h2>
+<div class="product-meta">Lashes & Brows · Lash Kit</div>
+<a href="https://amzn.to/4uKFXrl" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script>
+const cards = document.querySelectorAll(".product-card");
+const searchInput = document.getElementById("searchInput");
+const resultCount = document.getElementById("resultCount");
+
+let activeCategory = "all";
+
+function filterProducts() {
+  let visible = 0;
+  const search = searchInput.value.toLowerCase();
+
+  cards.forEach(card => {
+    const category = card.dataset.category;
+    const text = card.dataset.search.toLowerCase();
+
+    const match =
+      (activeCategory === "all" || category.includes(activeCategory)) &&
+      text.includes(search);
+
+    card.classList.toggle("hidden", !match);
+    if (match) visible++;
+  });
+
+  resultCount.textContent = `Showing ${visible} picks`;
+}
+
+document.querySelectorAll("#categoryFilters button").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll("#categoryFilters button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeCategory = btn.dataset.category;
+    filterProducts();
+  };
+});
+
+searchInput.oninput = filterProducts;
+
+filterProducts();
+</script>
+
+</body>
+</html>
