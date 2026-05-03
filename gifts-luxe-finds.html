@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Gifts & Luxe Finds | Kaia Layn</title>
+
+<style>
+:root {
+  --bg: #fffaf8;
+  --card: #ffffff;
+  --text: #2f2623;
+  --muted: #8d7b74;
+  --accent: #6a3d2e;
+  --border: #f0e4de;
+  --soft-card: #f2e5e8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 20px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.page-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+}
+
+h1 {
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 24px;
+}
+
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 250, 248, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 26px;
+}
+
+.search-box {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+.filter-section {
+  margin-top: 12px;
+}
+
+.filter-label {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-btn {
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--accent);
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+  background: var(--soft-card);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.result-count {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.product-card {
+  background: var(--soft-card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.product-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+.product-info {
+  padding: 18px;
+}
+
+.product-info h2 {
+  font-size: 1rem;
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+
+.product-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.product-info a {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.product-info a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  background: #5a3326;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<a class="back-link" href="index.html">← Back to home</a>
+
+<div class="page-card">
+
+<h1>Gifts & Luxe Finds</h1>
+<p class="subtitle">Giftable beauty, cozy home finds, tech picks, games, and luxe-looking upgrades.</p>
+<p class="note">As an Amazon Associate, I earn from qualifying purchases.</p>
+
+<div class="filter-bar">
+
+<input id="searchInput" class="search-box" placeholder="Search gifts, luxe beauty, tech, games, cozy finds...">
+
+<div class="filter-section">
+<p class="filter-label">Shop by category</p>
+<div class="filter-group" id="categoryFilters">
+<button class="filter-btn active" data-category="all">All</button>
+<button class="filter-btn" data-category="luxe">Luxe-Looking Finds</button>
+<button class="filter-btn" data-category="beauty">Beauty Gifts</button>
+<button class="filter-btn" data-category="tech">Tech Gifts</button>
+<button class="filter-btn" data-category="home">Home Gifts</button>
+<button class="filter-btn" data-category="cozy">Cozy Gifts</button>
+<button class="filter-btn" data-category="games">Games & Hosting</button>
+<button class="filter-btn" data-category="wellness">Wellness Gifts</button>
+</div>
+</div>
+
+<p id="resultCount" class="result-count"></p>
+
+</div>
+
+<div class="product-grid">
+
+<div class="product-card" data-category="beauty luxe" data-search="shark flexstyle air styling drying system luxe beauty gift hair tool dyson alternative">
+<img src="images/glowup/sharkset.png">
+<div class="product-info">
+<h2>Shark FlexStyle Air Styling & Drying System</h2>
+<div class="product-meta">Beauty Gifts · Luxe Hair Tool</div>
+<a href="https://amzn.to/4epjuv0" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="beauty luxe" data-search="shark cryoglow led anti aging infrared light therapy luxe skincare beauty gift">
+<img src="images/glowup/sharkfacelight.png">
+<div class="product-info">
+<h2>Shark CryoGlow LED Anti-Aging & Repair Infrared Light Therapy</h2>
+<div class="product-meta">Beauty Gifts · Luxe Skincare Tool</div>
+<a href="https://amzn.to/4uoiRq7" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="luxe beauty" data-search="mulberry silk pillowcase hair skin luxe beauty gift sleep">
+<img src="images/glowup/silkpillow.png">
+<div class="product-info">
+<h2>Mulberry Silk Pillowcase for Hair and Skin</h2>
+<div class="product-meta">Luxe-Looking Finds · Beauty Gift</div>
+<a href="https://amzn.to/4tWAtcP" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="luxe beauty" data-search="k18 leave in molecular repair hair mask luxury haircare beauty gift">
+<img src="images/glowup/k18.png">
+<div class="product-info">
+<h2>K18 Leave-In Molecular Repair Hair Mask</h2>
+<div class="product-meta">Beauty Gifts · Luxe Haircare</div>
+<a href="https://amzn.to/4djN8k5" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="luxe beauty" data-search="kerastase elixir ultime hair oil luxury haircare beauty gift shine">
+<img src="images/glowup/keraoil.png">
+<div class="product-info">
+<h2>Kerastase Elixir Ultime Hair Oil</h2>
+<div class="product-meta">Beauty Gifts · Luxe Haircare</div>
+<a href="https://amzn.to/3P1SjvQ" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="luxe beauty" data-search="biodance collagen overnight face mask skincare gift glow hydration">
+<img src="images/glowup/biodancemask.png">
+<div class="product-info">
+<h2>BIODANCE Bio-Collagen Overnight Face Mask</h2>
+<div class="product-meta">Beauty Gifts · Skincare</div>
+<a href="https://amzn.to/4ehSPA5" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="luxe beauty" data-search="iconic london illuminator makeup glow highlighter luxe beauty gift">
+<img src="images/glowup/iconic.png">
+<div class="product-info">
+<h2>ICONIC LONDON Illuminator</h2>
+<div class="product-meta">Beauty Gifts · Luxe Glow</div>
+<a href="https://amzn.to/4cUw3gJ" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="wellness beauty" data-search="nutrafol women hair growth supplements wellness beauty gift">
+<img src="images/glowup/nutrafol.png">
+<div class="product-info">
+<h2>Nutrafol Women Hair Growth Supplements</h2>
+<div class="product-meta">Wellness Gifts · Hair Growth</div>
+<a href="https://amzn.to/427NBQa" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="wellness beauty" data-search="codeage collagen peptides protein powder wellness beauty gift">
+<img src="images/glowup/collpep.png">
+<div class="product-info">
+<h2>Codeage Multi Collagen Protein Powder Peptides</h2>
+<div class="product-meta">Wellness Gifts · Collagen</div>
+<a href="https://amzn.to/3QLi97R" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="home cozy" data-search="candle warmer lamp timer dimmable home gift cozy aesthetic decor">
+<img src="images/candlewarmer.png">
+<div class="product-info">
+<h2>Candle Warmer Lamp with Timer</h2>
+<div class="product-meta">Home Gifts · Cozy Decor</div>
+<a href="https://amzn.to/424B7Ja" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="home cozy" data-search="flameless candles set of 2 home gift cozy decor aesthetic">
+<img src="images/2candles.png">
+<div class="product-info">
+<h2>Flameless Candles Set of 2</h2>
+<div class="product-meta">Home Gifts · Cozy Decor</div>
+<a href="https://amzn.to/4tzd9BP" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="home luxe" data-search="battery operated wall sconce rechargeable home gift decor lighting luxe looking">
+<img src="images/sconces.png">
+<div class="product-info">
+<h2>Battery Operated Wall Sconce Set of 2</h2>
+<div class="product-meta">Home Gifts · Luxe-Looking Decor</div>
+<a href="https://amzn.to/48S2kCs" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="cozy home" data-search="greenoak heated electric blanket cozy gift home comfort">
+<img src="images/heatblanket.png">
+<div class="product-info">
+<h2>Greenoak Heated Electric Blanket</h2>
+<div class="product-meta">Cozy Gifts · Comfort</div>
+<a href="https://amzn.to/425cY5c" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="tech home" data-search="life360 bluetooth trackers keys wallets tech gift everyday useful">
+<img src="images/l360tag.png">
+<div class="product-info">
+<h2>Life360 Bluetooth Trackers for Keys and Wallets</h2>
+<div class="product-meta">Tech Gifts · Everyday Essential</div>
+<a href="https://amzn.to/3QFznDA" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="tech" data-search="wireless mini microphone clearvoice tech gift content creator video tiktok">
+<img src="images/microphone.png">
+<div class="product-info">
+<h2>Wireless Mini Microphone, ClearVoice</h2>
+<div class="product-meta">Tech Gifts · Creator Find</div>
+<a href="https://amzn.to/4cM33pO" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="tech home" data-search="ruwby full hd webcam tech gift remote work meetings">
+<img src="images/webcam.png">
+<div class="product-info">
+<h2>RUWBY Full HD 1080P Webcam</h2>
+<div class="product-meta">Tech Gifts · Remote Work</div>
+<a href="https://amzn.to/4e6It60" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="tech home games" data-search="bolabutty bluetooth waterproof speaker tech gift hosting music">
+<img src="images/btspeaker.png">
+<div class="product-info">
+<h2>BolaButty Bluetooth Waterproof Speaker</h2>
+<div class="product-meta">Tech Gifts · Hosting</div>
+<a href="https://amzn.to/4ujYqdW" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="games" data-search="catan board game strategy gift game night hosting friends family">
+<img src="images/catan.png">
+<div class="product-info">
+<h2>CATAN Board Game, Strategy</h2>
+<div class="product-meta">Games & Hosting · Game Night</div>
+<a href="https://amzn.to/4eTJBKt" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="games" data-search="telestrations adult board game party gift game night hosting">
+<img src="images/telestrations.png">
+<div class="product-info">
+<h2>Telestrations: Adult Board Game</h2>
+<div class="product-meta">Games & Hosting · Party Game</div>
+<a href="https://amzn.to/4cURAUW" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="games wellness" data-search="aesthetic pickleball set sport gift outdoor game wellness">
+<img src="images/pickleball.png">
+<div class="product-info">
+<h2>Aesthetic Pickleball Set</h2>
+<div class="product-meta">Games & Hosting · Fun Gift</div>
+<a href="https://amzn.to/4eT4l57" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="luxe" data-search="pavoi 14k gold plated classic tennis bracelet jewelry gift luxe looking">
+<img src="images/tnsbracelet.png">
+<div class="product-info">
+<h2>PAVOI 14K Gold Plated Classic Tennis Bracelet</h2>
+<div class="product-meta">Luxe-Looking Finds · Jewelry</div>
+<a href="https://amzn.to/4t0bUdU" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="luxe" data-search="moissanite earrings 18k white gold plated jewelry gift luxe looking">
+<img src="images/earrings.png">
+<div class="product-info">
+<h2>Moissanite Earrings, 18K White Gold Plated</h2>
+<div class="product-meta">Luxe-Looking Finds · Jewelry</div>
+<a href="https://amzn.to/4ejSvRu" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="wellness tech" data-search="toloco massage gun deep tissue wellness gift recovery tech">
+<img src="images/massagegun.png">
+<div class="product-info">
+<h2>TOLOCO Massage Gun, Deep Tissue</h2>
+<div class="product-meta">Wellness Gifts · Recovery</div>
+<a href="https://amzn.to/4unrLUY" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+<div class="product-card" data-category="wellness beauty" data-search="crest 3d whitestrips professional effects teeth whitening smile gift">
+<img src="images/glowup/crestwhite.png">
+<div class="product-info">
+<h2>Crest 3D Whitestrips Professional Effects</h2>
+<div class="product-meta">Beauty Gifts · Smile</div>
+<a href="https://amzn.to/4tMubfD" target="_blank" rel="nofollow sponsored">Shop on Amazon</a>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script>
+const cards = document.querySelectorAll(".product-card");
+const searchInput = document.getElementById("searchInput");
+const resultCount = document.getElementById("resultCount");
+
+let activeCategory = "all";
+
+function filterProducts() {
+  let visible = 0;
+  const search = searchInput.value.toLowerCase();
+
+  cards.forEach(card => {
+    const category = card.dataset.category;
+    const text = card.dataset.search.toLowerCase();
+
+    const match =
+      (activeCategory === "all" || category.includes(activeCategory)) &&
+      text.includes(search);
+
+    card.classList.toggle("hidden", !match);
+    if (match) visible++;
+  });
+
+  resultCount.textContent = `Showing ${visible} picks`;
+}
+
+document.querySelectorAll("#categoryFilters button").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll("#categoryFilters button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeCategory = btn.dataset.category;
+    filterProducts();
+  };
+});
+
+searchInput.oninput = filterProducts;
+
+filterProducts();
+</script>
+
+</body>
+</html>
